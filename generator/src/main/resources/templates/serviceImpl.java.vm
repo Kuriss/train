@@ -1,0 +1,57 @@
+package ${package.ServiceImpl};
+
+import org.springframework.stereotype.Service;
+import ${package.Service}.${table.serviceName};
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.kuriss.train.common.util.SnowUtil;
+import jakarta.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+/**
+ * ${tableComment} 服务实现类
+ */
+@Service
+public class ${entity}ServiceImpl implements I${entity}Service {
+    // 实现Service方法
+    @Autowired
+    private ${entity}Mapper ${entity}Mapper;
+
+    @Override
+    public long countByExample(${entity} record) {
+        QueryWrapper<${entity}> queryWrapper = new QueryWrapper<>(record);
+        return ${entity}Mapper.selectCount(queryWrapper);
+    }
+
+    @Override
+    public int deleteByExample(${entity} record) {
+        QueryWrapper<${entity}> queryWrapper = new QueryWrapper<>(record);
+        return ${entity}Mapper.delete(queryWrapper);
+    }
+
+    @Override
+    public List<${entity}> selectByExample(${entity} record) {
+        QueryWrapper<${entity}> queryWrapper = new QueryWrapper<>(record);
+        return ${entity}Mapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public ${entity} selectByPrimaryKey(Long id) {
+        return ${entity}Mapper.selectById(id);
+    }
+
+    @Override
+    public int updateByExampleSelective(${entity} record) {
+        UpdateWrapper<${entity}> updateWrapper = new UpdateWrapper<>(record);
+        return ${entity}Mapper.update(record, updateWrapper);
+    }
+
+    @Override
+    public int insertSelective(${entity} record) {
+        return ${entity}Mapper.insert(record); // 非空字段插入
+    }
+}

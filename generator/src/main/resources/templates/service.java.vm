@@ -1,0 +1,34 @@
+package ${package.Service};
+
+public interface I${entity}Service {
+    // Service相关方法
+    /**
+     * 统计符合条件的记录数
+     */
+    long countByExample(${entity} record);
+
+    /**
+     * 根据条件删除记录
+     */
+    int deleteByExample(${entity} record);
+
+    /**
+     * 根据条件查询记录
+     */
+    List<${entity}> selectByExample(${entity} record);
+
+    /**
+     * 根据主键查询记录
+     */
+        ${entity} selectByPrimaryKey(Long id);
+
+    /**
+     * 根据条件更新非空字段
+     */
+    int updateByExampleSelective(${entity} record);
+
+    /**
+     * 插入记录（非空字段）
+     */
+    int insertSelective(${entity} record);
+}

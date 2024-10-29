@@ -1,0 +1,6 @@
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
+public interface ${entity}Mapper extends BaseMapper<${entity}> {
+    // 自定义方法可以在 Service 中实现
+}
