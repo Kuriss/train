@@ -1,6 +1,8 @@
 package com.kuriss.train.member.controller;
 
 
+import com.kuriss.train.common.resp.CommonResp;
+import com.kuriss.train.member.entity.MemberRegisterDto;
 import com.kuriss.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,13 +26,15 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping("/count")
-    public Integer count() {
-        return memberService.count();
+    public CommonResp<Integer> count() {
+        CommonResp<Integer> commonResp = new CommonResp<>();
+        commonResp.setContent(memberService.count());
+        return commonResp ;
     }
 
     @PostMapping("/register")
-    public long register(String mobile) {
-        return memberService.register(mobile);
+    public CommonResp<Long> register(MemberRegisterDto mrd) {
+        return new CommonResp<>(memberService.register(mrd));
     }
 }
 
