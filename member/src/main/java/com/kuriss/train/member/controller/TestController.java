@@ -14,30 +14,21 @@
  * limitations under the License.
  */
 
-package com.kuriss.train.demos.web;
+package com.kuriss.train.member.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
  */
-public class User {
+@RestController
+public class TestController {
 
-    private String name;
-
-    private Integer age;
-
-    public String getName() {
-        return name;
+    // http://127.0.0.1:8080/hello
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello";
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
 }
