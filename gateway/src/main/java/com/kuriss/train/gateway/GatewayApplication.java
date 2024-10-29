@@ -16,6 +16,6 @@ public class GatewayApplication {
         SpringApplication app = new SpringApplication(GatewayApplication.class);
         Environment env = app.run(args).getEnvironment();
         LOG.info("启动成功！！");
-        LOG.info("测试地址: \thttp://127.0.0.1:{}{}/hello!1223", env.getProperty("server.port"));
+        LOG.info("测试地址: \thttp://127.0.0.1:{}{}/hello!3", env.getProperty("server.port"));
     }
 }
