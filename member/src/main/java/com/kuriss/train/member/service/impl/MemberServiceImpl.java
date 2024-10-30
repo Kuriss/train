@@ -1,8 +1,7 @@
 package com.kuriss.train.member.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.kuriss.train.member.entity.Member;
+import com.kuriss.train.member.entity.MemberQuery;
 import com.kuriss.train.member.mapper.MemberMapper;
 import com.kuriss.train.member.service.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,26 +14,22 @@ import java.util.List;
  */
 @Service
 public class MemberServiceImpl implements IMemberService {
-    // 实现Service方法
     @Autowired
     private MemberMapper memberMapper;
 
     @Override
-    public long countByExample(Member record) {
-        QueryWrapper<Member> queryWrapper = new QueryWrapper<>(record);
-        return memberMapper.selectCount(queryWrapper);
+    public long countByExample(MemberQuery query) {
+        return memberMapper.selectCount(query.getQueryWrapper());
     }
 
     @Override
-    public int deleteByExample(Member record) {
-        QueryWrapper<Member> queryWrapper = new QueryWrapper<>(record);
-        return memberMapper.delete(queryWrapper);
+    public int deleteByExample(MemberQuery query) {
+        return memberMapper.delete(query.getQueryWrapper());
     }
 
     @Override
-    public List<Member> selectByExample(Member record) {
-        QueryWrapper<Member> queryWrapper = new QueryWrapper<>(record);
-        return memberMapper.selectList(queryWrapper);
+    public List<Member> selectByExample(MemberQuery query) {
+        return memberMapper.selectList(query.getQueryWrapper());
     }
 
     @Override
@@ -43,9 +38,9 @@ public class MemberServiceImpl implements IMemberService {
     }
 
     @Override
-    public int updateByExampleSelective(Member record) {
-        UpdateWrapper<Member> updateWrapper = new UpdateWrapper<>(record);
-        return memberMapper.update(record, updateWrapper);
+    public int updateByExampleSelective(Member record, MemberQuery query) {
+
+        return 0;
     }
 
     @Override
