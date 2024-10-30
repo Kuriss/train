@@ -3,6 +3,7 @@ package com.kuriss.train.member.service;
 import cn.hutool.core.collection.CollUtil;
 import com.kuriss.train.common.exception.BusinessException;
 import com.kuriss.train.common.exception.BusinessExceptionEnum;
+import com.kuriss.train.common.util.SnowUtil;
 import com.kuriss.train.member.entity.Member;
 import com.kuriss.train.member.entity.MemberQuery;
 import com.kuriss.train.member.entity.MemberRegisterDto;
@@ -31,7 +32,7 @@ public class MemberService {
         Member member = new Member();
 
         member.setMobile(mobile);
-        member.setId(System.currentTimeMillis());
+        member.setId(SnowUtil.getSnowflakeNextId());
         memberServiceImpl.insertSelective(member);
         return member.getId();
     }
