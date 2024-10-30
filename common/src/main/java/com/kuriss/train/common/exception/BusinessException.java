@@ -14,4 +14,6 @@ private BusinessExceptionEnum e;
     public void setE(BusinessExceptionEnum e) {
         this.e = e;
     }
+    @Override
+    public Throwable fillInStackTrace() {return this;}
 }
