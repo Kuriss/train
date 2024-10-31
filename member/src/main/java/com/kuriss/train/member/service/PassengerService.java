@@ -2,6 +2,7 @@ package com.kuriss.train.member.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
+import com.kuriss.train.common.context.LoginMemberContext;
 import com.kuriss.train.common.util.SnowUtil;
 import com.kuriss.train.member.entity.Passenger;
 import com.kuriss.train.member.entity.PassengerSaveDto;
@@ -17,6 +18,7 @@ public class PassengerService {
     public void save(PassengerSaveDto psd) {
         DateTime now = DateTime.now();
         Passenger passenger = BeanUtil.copyProperties(psd, Passenger.class);
+        passenger.setMemberId(LoginMemberContext.getId());
         passenger.setId(SnowUtil.getSnowflakeNextId());
         passenger.setCreateTime(now);
         passenger.setUpdateTime(now);
