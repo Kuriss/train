@@ -1,8 +1,7 @@
 package com.kuriss.train.member.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.kuriss.train.member.entity.Passenger;
+import com.kuriss.train.member.entity.PassengerQuery;
 import com.kuriss.train.member.mapper.PassengerMapper;
 import com.kuriss.train.member.service.IPassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,26 +14,22 @@ import java.util.List;
  */
 @Service
 public class PassengerServiceImpl implements IPassengerService {
-    // 实现Service方法
     @Autowired
     private PassengerMapper passengerMapper;
 
     @Override
-    public long countByExample(Passenger record) {
-        QueryWrapper<Passenger> queryWrapper = new QueryWrapper<>(record);
-        return passengerMapper.selectCount(queryWrapper);
+    public long countByExample(PassengerQuery query) {
+        return passengerMapper.selectCount(query.getQueryWrapper());
     }
 
     @Override
-    public int deleteByExample(Passenger record) {
-        QueryWrapper<Passenger> queryWrapper = new QueryWrapper<>(record);
-        return passengerMapper.delete(queryWrapper);
+    public int deleteByExample(PassengerQuery query) {
+        return passengerMapper.delete(query.getQueryWrapper());
     }
 
     @Override
-    public List<Passenger> selectByExample(Passenger record) {
-        QueryWrapper<Passenger> queryWrapper = new QueryWrapper<>(record);
-        return passengerMapper.selectList(queryWrapper);
+    public List<Passenger> selectByExample(PassengerQuery query) {
+        return passengerMapper.selectList(query.getQueryWrapper());
     }
 
     @Override
@@ -44,8 +39,7 @@ public class PassengerServiceImpl implements IPassengerService {
 
     @Override
     public int updateByExampleSelective(Passenger record) {
-        UpdateWrapper<Passenger> updateWrapper = new UpdateWrapper<>(record);
-        return passengerMapper.update(record, updateWrapper);
+        return 0;
     }
 
     @Override

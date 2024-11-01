@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CodeGenerator {
 
@@ -36,7 +38,14 @@ public class CodeGenerator {
                             .moduleName(moduleName) // 设置模块名
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, projectRoot + "/" + moduleName + "/src/main/resources/mapper"));
                 })
-
+                // 自定义配置
+                .injectionConfig(builder -> {
+                    builder.beforeOutputFile((tableInfo, objectMap) -> {
+                        Map<String, String> customFile = new HashMap<>();
+                        customFile.put("Query.java", projectRoot + "/" + moduleName + "/src/main/java/com/kuriss/train/" + moduleName + "/query/" + tableInfo.getEntityName() + "Query.java");
+                        objectMap.put("customFile", customFile);
+                    });
+                })
                 // 策略配置
                 .strategyConfig(builder -> {
                     builder.addInclude(tableName) // 设置单个表名
@@ -53,7 +62,7 @@ public class CodeGenerator {
                 .templateConfig(builder -> {
                     builder.controller("/templates/mapper.java.vm") // 设置Controller的自定义模板路径
                             .service("/templates/service.java.vm") // 设置Service接口的自定义模板路径
-                            .serviceImpl("/templates/serviceImpl.java.vm"); // 设置Service实现类的自定义模板路径
+                            .serviceImpl("/templates/serviceImpl.java.vm");// 设置Service实现类的自定义模板路径
                 })
                 // 设置模板引擎
                 .templateEngine(new VelocityTemplateEngine())

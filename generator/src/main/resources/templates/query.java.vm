@@ -1,0 +1,40 @@
+package ${package}.${moduleName}.query;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ${entity}Query {
+    private QueryWrapper<${entity}> queryWrapper;
+    private List<Criteria> oredCriteria;
+
+    public ${entity}Query() {
+        this.queryWrapper = new QueryWrapper<>();
+        this.oredCriteria = new ArrayList<>();
+    }
+
+    public QueryWrapper<${entity}> getQueryWrapper() {
+        oredCriteria.forEach(criteria -> queryWrapper.apply(criteria.buildConditions()));
+        return queryWrapper;
+    }
+
+    public void or(Criteria criteria) {
+        oredCriteria.add(criteria);
+        queryWrapper.or().nested(wrapper -> wrapper.apply(criteria.buildConditions()));
+    }
+
+    public static class Criteria {
+        private final List<String> conditions = new ArrayList<>();
+
+        public Criteria andIdEqualTo(Long value) {
+            if (value != null) {
+                conditions.add("id = " + value);
+            }
+            return this;
+        }
+
+        protected String buildConditions() {
+            return String.join(" AND ", conditions);
+        }
+    }
+}

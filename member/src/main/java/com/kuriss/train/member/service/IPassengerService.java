@@ -1,6 +1,7 @@
 package com.kuriss.train.member.service;
 
 import com.kuriss.train.member.entity.Passenger;
+import com.kuriss.train.member.entity.PassengerQuery;
 
 import java.util.List;
 
@@ -9,17 +10,17 @@ public interface IPassengerService {
     /**
      * 统计符合条件的记录数
      */
-    long countByExample(Passenger record);
+    long countByExample(PassengerQuery record);
 
     /**
      * 根据条件删除记录
      */
-    int deleteByExample(Passenger record);
+    int deleteByExample(PassengerQuery record);
 
     /**
      * 根据条件查询记录
      */
-    List<Passenger> selectByExample(Passenger record);
+    List<Passenger> selectByExample(PassengerQuery record);
 
     /**
      * 根据主键查询记录
