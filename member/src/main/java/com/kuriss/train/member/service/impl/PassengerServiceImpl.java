@@ -1,5 +1,6 @@
 package com.kuriss.train.member.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.kuriss.train.member.entity.Passenger;
 import com.kuriss.train.member.entity.PassengerQuery;
 import com.kuriss.train.member.mapper.PassengerMapper;
@@ -45,5 +46,38 @@ public class PassengerServiceImpl implements IPassengerService {
     @Override
     public int insertSelective(Passenger record) {
         return passengerMapper.insert(record); // 非空字段插入
+    }
+
+    @Override
+    public int updateByPrimaryKey(Passenger passenger) {
+        UpdateWrapper<Passenger> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id", passenger.getId());
+
+        // 设置要更新的字段
+        if (passenger.getMemberId() != null) {
+            updateWrapper.set("member_id", passenger.getMemberId());
+        }
+        if (passenger.getName() != null) {
+            updateWrapper.set("name", passenger.getName());
+        }
+        if (passenger.getIdCard() != null) {
+            updateWrapper.set("id_card", passenger.getIdCard());
+        }
+        if (passenger.getType() != null) {
+            updateWrapper.set("type", passenger.getType());
+        }
+        if (passenger.getCreateTime() != null) {
+            updateWrapper.set("create_time", passenger.getCreateTime());
+        }
+        if (passenger.getUpdateTime() != null) {
+            updateWrapper.set("update_time", passenger.getUpdateTime());
+        }
+
+        return passengerMapper.update(null, updateWrapper);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Long id) {
+        return passengerMapper.deleteById(id);
     }
 }

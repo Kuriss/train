@@ -36,4 +36,7 @@ public interface IPassengerService {
      * 插入记录（非空字段）
      */
     int insertSelective(Passenger record);
+    public int updateByPrimaryKey(Passenger passenger);
+
+    int deleteByPrimaryKey(Long id);
 }

@@ -13,13 +13,13 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         // 从命令行参数获取模块名称、数据库名称和单个表名
-        String moduleName = args.length > 0 ? args[0] : "member"; // 默认模块名为 "member"
-        String dbName = args.length > 1 ? args[1] : "train_member"; // 默认数据库名为 "train_member"
-        String tableName = args.length > 2 ? args[2] : "passenger"; // 单个表名，默认是 "example_table"
+        String moduleName = args.length > 0 ? args[0] : "business"; // 默认模块名为 "member"
+        String dbName = args.length > 1 ? args[1] : "train_business"; // 默认数据库名为 "train_member"
+        String tableName = args.length > 2 ? args[2] : "Station"; // 单个表名，默认是 "example_table"
 
         // 设置数据库连接信息
         String dbUrl = "jdbc:mysql://localhost:3306/" + dbName + "?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
-        String dbUsername = "train_member"; // 替换为你的数据库用户名
+        String dbUsername = "train_business"; // 替换为你的数据库用户名
         String dbPassword = "123456"; // 替换为你的数据库密码
 
         // 获取当前项目的根目录路径

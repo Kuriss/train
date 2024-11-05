@@ -32,11 +32,16 @@ public class PassengerService {
     public void save(PassengerSaveDto psd) {
         Date now = DateTime.now();
         Passenger passenger = BeanUtil.copyProperties(psd, Passenger.class);
-        passenger.setMemberId(LoginMemberContext.getId());
-        passenger.setId(SnowUtil.getSnowflakeNextId());
-        passenger.setCreateTime(now);
-        passenger.setUpdateTime(now);
-        passengerMapper.insert(passenger);
+        if(ObjectUtil.isNull(passenger.getId())) {
+            passenger.setMemberId(LoginMemberContext.getId());
+            passenger.setId(SnowUtil.getSnowflakeNextId());
+            passenger.setCreateTime(now);
+            passenger.setUpdateTime(now);
+            passengerMapper.insert(passenger);
+        }else {
+            passenger.setUpdateTime(now);
+            passengerServiceImpl.updateByPrimaryKey(passenger);
+        }
     }
     public PageResp<PassengerQueryResp> queryList(PassengerQueryDto pqd) {
         PassengerQuery pq = new PassengerQuery();
@@ -54,5 +59,8 @@ public class PassengerService {
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(passengerQueryResps);
         return pageResp;
+    }
+    public void delete(Long id){
+        passengerServiceImpl.deleteByPrimaryKey(id);
     }
 }
