@@ -3,6 +3,7 @@ package com.kuriss.train.business.controller.admin;
 import com.kuriss.train.business.req.TrainQueryReq;
 import com.kuriss.train.business.req.TrainSaveReq;
 import com.kuriss.train.business.resp.TrainQueryResp;
+import com.kuriss.train.business.service.TrainSeatService;
 import com.kuriss.train.business.service.TrainService;
 import com.kuriss.train.common.resp.CommonResp;
 import com.kuriss.train.common.resp.PageResp;
@@ -18,6 +19,9 @@ public class TrainAdminController {
 
     @Resource
     private TrainService trainService;
+
+    @Resource
+    private TrainSeatService trainSeatService;
 
     @GetMapping("/query-all")
     public CommonResp<List<TrainQueryResp>> queryList() {
@@ -37,6 +41,11 @@ public class TrainAdminController {
     @DeleteMapping("/delete/{id}")
     public CommonResp<Object> delete(@PathVariable Long id) {
         trainService.delete(id);
+        return new CommonResp<>();
+    }
+    @GetMapping("/gen-seat/{trainCode}")
+    public CommonResp<Object> genSeat(@PathVariable String trainCode) {
+        trainSeatService.genTrainSeat(trainCode);
         return new CommonResp<>();
     }
 }

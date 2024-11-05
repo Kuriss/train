@@ -1,18 +1,14 @@
 package com.kuriss.train.business.req;
 
 import com.kuriss.train.common.req.PageReq;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class TrainStationQueryReq extends PageReq {
 
     private String trainCode;
-
-    public String getTrainCode() {
-        return trainCode;
-    }
-
-    public void setTrainCode(String trainCode) {
-        this.trainCode = trainCode;
-    }
 
     @Override
     public String toString() {

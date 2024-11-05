@@ -32,7 +32,7 @@ public class StationService {
 
     public List<StationQueryResp> queryAll() {
         StationQuery stationQuery = new StationQuery();
-        stationQuery.setOrderByClause("name_pinyin asc");
+        stationQuery.getQueryWrapper().orderByDesc("name_pinyin");
         List<Station> stationList = stationServiceImpl.selectByExample(stationQuery);
         return BeanUtil.copyToList(stationList, StationQueryResp.class);
     }
