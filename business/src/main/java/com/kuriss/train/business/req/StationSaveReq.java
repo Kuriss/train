@@ -1,34 +1,34 @@
-package com.kuriss.train.business.resp;
+package com.kuriss.train.business.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.Date;
-
 @Data
-public class StationQueryResp {
+public class StationSaveReq {
 
     /**
      * id
      */
-    @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
 
     /**
      * 站名
      */
+    @NotBlank(message = "【站名】不能为空")
     private String name;
 
     /**
      * 站名拼音
      */
+    @NotBlank(message = "【站名拼音】不能为空")
     private String namePinyin;
 
     /**
      * 站名拼音首字母
      */
+    @NotBlank(message = "【站名拼音首字母】不能为空")
     private String namePy;
 
     /**

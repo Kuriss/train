@@ -5,13 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StationQuery {
-    private QueryWrapper<Station> queryWrapper;
+public class TrainQuery {
+    private QueryWrapper<Train> queryWrapper;
     private String orderByClause;
     private boolean distinct;
     private List<Criteria> oredCriteria;
 
-    public StationQuery() {
+    public TrainQuery() {
         this.queryWrapper = new QueryWrapper<>();
         this.oredCriteria = new ArrayList<>();
     }
@@ -82,7 +82,7 @@ public class StationQuery {
         queryWrapper.clear();
     }
 
-    public QueryWrapper<Station> getQueryWrapper() {
+    public QueryWrapper<Train> getQueryWrapper() {
         // 根据 oredCriteria 构建条件
         oredCriteria.forEach(criteria -> queryWrapper.apply(criteria.buildConditions()));
         return queryWrapper;

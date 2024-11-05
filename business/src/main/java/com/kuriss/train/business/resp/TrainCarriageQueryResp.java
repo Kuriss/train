@@ -6,9 +6,8 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.util.Date;
-
 @Data
-public class StationQueryResp {
+public class TrainCarriageQueryResp {
 
     /**
      * id
@@ -17,19 +16,34 @@ public class StationQueryResp {
     private Long id;
 
     /**
-     * 站名
+     * 车次编号
      */
-    private String name;
+    private String trainCode;
 
     /**
-     * 站名拼音
+     * 厢号
      */
-    private String namePinyin;
+    private Integer index;
 
     /**
-     * 站名拼音首字母
+     * 座位类型|枚举[SeatTypeEnum]
      */
-    private String namePy;
+    private String seatType;
+
+    /**
+     * 座位数
+     */
+    private Integer seatCount;
+
+    /**
+     * 排数
+     */
+    private Integer rowCount;
+
+    /**
+     * 列数
+     */
+    private Integer colCount;
 
     /**
      * 新增时间
@@ -42,4 +56,5 @@ public class StationQueryResp {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
+
 }

@@ -20,7 +20,17 @@ public class PassengerQuery {
     // 设置排序规则
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
-        queryWrapper.orderBy(true, true, orderByClause);
+        if (orderByClause != null && !orderByClause.trim().isEmpty()) {
+            String[] parts = orderByClause.trim().split("\\s+");
+            if (parts.length >= 1) {
+                String column = parts[0];
+                boolean isAsc = true; // 默认升序
+                if (parts.length >= 2) {
+                    isAsc = !"desc".equalsIgnoreCase(parts[1]);
+                }
+                queryWrapper.orderBy(true, isAsc, column);
+            }
+        }
     }
 
     public String getOrderByClause() {

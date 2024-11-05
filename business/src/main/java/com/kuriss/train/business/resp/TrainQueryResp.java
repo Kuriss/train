@@ -8,38 +8,31 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class StationQueryResp {
-
-    /**
-     * id
-     */
+public class TrainQueryResp {
     @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
 
-    /**
-     * 站名
-     */
-    private String name;
+    private String code;
 
-    /**
-     * 站名拼音
-     */
-    private String namePinyin;
+    private String type;
 
-    /**
-     * 站名拼音首字母
-     */
-    private String namePy;
+    private String start;
 
-    /**
-     * 新增时间
-     */
+    private String startPinyin;
+
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
+    private Date startTime;
+
+    private String end;
+
+    private String endPinyin;
+
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
+    private Date endTime;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
-
-    /**
-     * 修改时间
-     */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
+
 }

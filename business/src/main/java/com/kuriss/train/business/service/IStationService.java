@@ -36,4 +36,7 @@ public interface IStationService {
      * 插入记录（非空字段）
      */
     int insertSelective(Station record);
+
+    public int updateByPrimaryKey(Station station);
+    int deleteByPrimaryKey(Long id);
 }
