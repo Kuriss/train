@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kuriss.train.business.controller;
+package com.kuriss.train.batch.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

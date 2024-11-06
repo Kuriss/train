@@ -1,15 +1,18 @@
-package com.kuriss.train.business.config;
+package com.kuriss.train.batch.config;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 @ComponentScan("com.kuriss")
-//@MapperScan("com.kuriss.train.business.mapper")
+@MapperScan("com.kuriss.train.*.mapper")
+@EnableFeignClients("com.kuriss.train.batch.feign")
 public class BatchApplication {
 
 
