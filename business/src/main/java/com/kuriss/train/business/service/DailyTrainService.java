@@ -36,18 +36,18 @@ public class DailyTrainService {
     @Resource
     private TrainService trainService;
 
-//    @Resource
-//    private DailyTrainStationService dailyTrainStationService;
-//
-//    @Resource
-//    private DailyTrainCarriageService dailyTrainCarriageService;
-//
-//    @Resource
-//    private DailyTrainSeatService dailyTrainSeatService;
-//
-//    @Resource
-//    private DailyTrainTicketService dailyTrainTicketService;
-//
+    @Resource
+    private DailyTrainStationService dailyTrainStationService;
+
+    @Resource
+    private DailyTrainCarriageService dailyTrainCarriageService;
+
+    @Resource
+    private DailyTrainSeatService dailyTrainSeatService;
+
+    @Resource
+    private DailyTrainTicketService dailyTrainTicketService;
+
 //    @Resource
 //    private SkTokenService skTokenService;
 
@@ -131,18 +131,18 @@ public class DailyTrainService {
         dailyTrain.setUpdateTime(now);
         dailyTrain.setDate(date);
         dailyTrainMapper.insert(dailyTrain);
-//
-//        // 生成该车次的车站数据
-//        dailyTrainStationService.genDaily(date, train.getCode());
-//
-//        // 生成该车次的车厢数据
-//        dailyTrainCarriageService.genDaily(date, train.getCode());
-//
-//        // 生成该车次的座位数据
-//        dailyTrainSeatService.genDaily(date, train.getCode());
-//
-//        // 生成该车次的余票数据
-//        dailyTrainTicketService.genDaily(dailyTrain, date, train.getCode());
+
+        // 生成该车次的车站数据
+        dailyTrainStationService.genDaily(date, train.getCode());
+
+        // 生成该车次的车厢数据
+        dailyTrainCarriageService.genDaily(date, train.getCode());
+
+        // 生成该车次的座位数据
+        dailyTrainSeatService.genDaily(date, train.getCode());
+
+        // 生成该车次的余票数据
+        dailyTrainTicketService.genDaily(dailyTrain, date, train.getCode());
 //
 //        // 生成令牌余量数据
 //        skTokenService.genDaily(date, train.getCode());
