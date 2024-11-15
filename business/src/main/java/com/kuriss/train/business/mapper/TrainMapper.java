@@ -1,7 +1,31 @@
 package com.kuriss.train.business.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.kuriss.train.business.entity.Train;
-public interface TrainMapper extends BaseMapper<Train> {
-    // 自定义方法可以在 Service 中实现
+import com.kuriss.train.business.entity.TrainExample;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface TrainMapper {
+    long countByExample(TrainExample example);
+
+    int deleteByExample(TrainExample example);
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(Train record);
+
+    int insertSelective(Train record);
+
+    List<Train> selectByExample(TrainExample example);
+
+    Train selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") Train record, @Param("example") TrainExample example);
+
+    int updateByExample(@Param("record") Train record, @Param("example") TrainExample example);
+
+    int updateByPrimaryKeySelective(Train record);
+
+    int updateByPrimaryKey(Train record);
 }

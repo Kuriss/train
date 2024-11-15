@@ -1,5 +1,8 @@
 package com.kuriss.train.common.resp;
 
+import lombok.Setter;
+
+@Setter
 public class CommonResp<T> {
 
     /**
@@ -34,24 +37,12 @@ public class CommonResp<T> {
         return success;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public T getContent() {
         return content;
-    }
-
-    public void setContent(T content) {
-        this.content = content;
     }
 
     @Override

@@ -4,8 +4,8 @@ import com.kuriss.train.business.req.DailyTrainStationQueryAllReq;
 import com.kuriss.train.business.resp.DailyTrainStationQueryResp;
 import com.kuriss.train.business.service.DailyTrainStationService;
 import com.kuriss.train.common.resp.CommonResp;
+import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/daily-train-station")
 public class DailyTrainStationController {
 
-    @Autowired
+    @Resource
     private DailyTrainStationService dailyTrainStationService;
 
     @GetMapping("/query-by-train-code")

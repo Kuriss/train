@@ -29,7 +29,7 @@ public class TestController {
     // http://127.0.0.1:8080/hello
     @GetMapping("/hello")
     public String hello() {
-        return "Hello";
+        return "hello";
     }
 
 }

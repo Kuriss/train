@@ -7,11 +7,11 @@ import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kuriss.train.business.entity.Train;
-import com.kuriss.train.business.entity.TrainQuery;
+import com.kuriss.train.business.entity.TrainExample;
+import com.kuriss.train.business.mapper.TrainMapper;
 import com.kuriss.train.business.req.TrainQueryReq;
 import com.kuriss.train.business.req.TrainSaveReq;
 import com.kuriss.train.business.resp.TrainQueryResp;
-import com.kuriss.train.business.service.impl.TrainServiceImpl;
 import com.kuriss.train.common.exception.BusinessException;
 import com.kuriss.train.common.exception.BusinessExceptionEnum;
 import com.kuriss.train.common.resp.PageResp;
@@ -20,40 +20,44 @@ import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class TrainService {
+
     private static final Logger LOG = LoggerFactory.getLogger(TrainService.class);
 
     @Resource
-    private TrainServiceImpl trainServiceImpl;
+    private TrainMapper trainMapper;
 
     public void save(TrainSaveReq req) {
         DateTime now = DateTime.now();
         Train train = BeanUtil.copyProperties(req, Train.class);
         if (ObjectUtil.isNull(train.getId())) {
+
             // 保存之前，先校验唯一键是否存在
             Train trainDB = selectByUnique(req.getCode());
             if (ObjectUtil.isNotEmpty(trainDB)) {
                 throw new BusinessException(BusinessExceptionEnum.BUSINESS_TRAIN_CODE_UNIQUE_ERROR);
             }
+
             train.setId(SnowUtil.getSnowflakeNextId());
             train.setCreateTime(now);
             train.setUpdateTime(now);
-            trainServiceImpl.insertSelective(train);
+            trainMapper.insert(train);
         } else {
             train.setUpdateTime(now);
-            trainServiceImpl.updateByPrimaryKey(train);
+            trainMapper.updateByPrimaryKey(train);
         }
     }
 
     private Train selectByUnique(String code) {
-        TrainQuery trainQuery = new TrainQuery();
-        trainQuery.createCriteria()
+        TrainExample trainExample = new TrainExample();
+        trainExample.createCriteria()
                 .andCodeEqualTo(code);
-        List<Train> list = trainServiceImpl.selectByExample(trainQuery);
+        List<Train> list = trainMapper.selectByExample(trainExample);
         if (CollUtil.isNotEmpty(list)) {
             return list.get(0);
         } else {
@@ -62,14 +66,14 @@ public class TrainService {
     }
 
     public PageResp<TrainQueryResp> queryList(TrainQueryReq req) {
-        TrainQuery trainQuery = new TrainQuery();
-
-        trainQuery.getQueryWrapper().orderByDesc("id");
+        TrainExample trainExample = new TrainExample();
+        trainExample.setOrderByClause("code asc");
+        TrainExample.Criteria criteria = trainExample.createCriteria();
 
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());
         PageHelper.startPage(req.getPage(), req.getSize());
-        List<Train> trainList = trainServiceImpl.selectByExample(trainQuery);
+        List<Train> trainList = trainMapper.selectByExample(trainExample);
 
         PageInfo<Train> pageInfo = new PageInfo<>(trainList);
         LOG.info("总行数：{}", pageInfo.getTotal());
@@ -84,22 +88,20 @@ public class TrainService {
     }
 
     public void delete(Long id) {
-        trainServiceImpl.deleteByPrimaryKey(id);
+        trainMapper.deleteByPrimaryKey(id);
     }
 
-
+    @Transactional
     public List<TrainQueryResp> queryAll() {
-        TrainQuery trainQuery = new TrainQuery();
-
-        trainQuery.getQueryWrapper().orderByDesc("code");
-
-        List<Train> trainList = trainServiceImpl.selectByExample(trainQuery);
+        List<Train> trainList = selectAll();
+        // LOG.info("再查一次");
+        // trainList = selectAll();
         return BeanUtil.copyToList(trainList, TrainQueryResp.class);
     }
 
     public List<Train> selectAll() {
-        TrainQuery trainQuery = new TrainQuery();
-        trainQuery.setOrderByClause("code asc");
-        return trainServiceImpl.selectByExample(trainQuery);
+        TrainExample trainExample = new TrainExample();
+        trainExample.setOrderByClause("code asc");
+        return trainMapper.selectByExample(trainExample);
     }
 }
